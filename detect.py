@@ -53,7 +53,7 @@ def predict_image(img_path):
     
     # You may need to map the class index to your class labels
     # For example, if you have a list of class labels, you can do:
-    class_labels = ["20 Pesos", "50 Pesos", "Fake 20 Pesos", "Fake 50 Pesos"]  # Replace with your actual class labels
+    class_labels = ["Real: 100", "Real: 1000", "Real: 20", "Real: 200", "Real: 50", "Real: 500", "Fake: 100",  "Fake: 1000", "Fake: 20", "Fake: 200", "Fake: 50", "Fake: 500"]  # Replace with your actual class labels
     predicted_class_label = class_labels[predicted_class_index]
     percent = predictions[0][predicted_class_index]
     return predicted_class_label

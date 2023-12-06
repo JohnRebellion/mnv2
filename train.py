@@ -22,7 +22,7 @@ validation_datagen = ImageDataGenerator(rescale=1./255)
 
 # Define the MobileNetV2 model with pre-trained weights
 base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
-num_classes=4
+num_classes=12
 
 # Create a new model for transfer learning
 model = models.Sequential()
@@ -52,7 +52,7 @@ validation_generator = validation_datagen.flow_from_directory(
 )
 
 # Train the model
-epochs = 47
+epochs = 50
 model.fit(
     train_generator,
     steps_per_epoch=train_generator.samples // batch_size,
