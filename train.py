@@ -52,7 +52,7 @@ validation_generator = validation_datagen.flow_from_directory(
 )
 
 # Train the model
-epochs = 50
+epochs = 500
 model.fit(
     train_generator,
     steps_per_epoch=train_generator.samples // batch_size,
