@@ -3,15 +3,33 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 import numpy as np
 import sys
+
+HAAR_ENABLED = True
+
 # Load the saved model
 model = tf.keras.models.load_model('2010SeriesPHBill.keras')
 
-import sys
-import base64
 from PIL import Image
-from io import BytesIO
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+import cv2
+
+base = '/home/johnn/mnv2'
+# Load the pre-trained Haar cascade for object detection
+haar_object_cascade = cv2.CascadeClassifier(base + '/' + 'haar_object.xml')
+
+# Function to detect objects in an image using Haar cascade
+def detect_haar_objects():
+    # Read the image
+    img = cv2.imread(sys.argv[1])
+    
+    # Convert the image to grayscale (required for object detection)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # Detect objects in the image
+    haar_objects = haar_object_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+    return (len(haar_objects) == 0)
+
 
 def load_and_resize_image(
         target_size=(224, 224)):
@@ -33,6 +51,7 @@ def preprocess_image():
 
 # Function to make predictions on a given image
 def predict_image():
+    if HAAR_ENABLED and detect_haar_objects(): print('proceed')
     img_array = preprocess_image()
     predictions = model.predict(img_array, verbose=0)
     
