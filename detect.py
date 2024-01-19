@@ -60,11 +60,11 @@ def preprocess_image():
 def predict_image():
     # if HAAR_ENABLED and detect_haar_objects(): print('proceed')
     img_array = preprocess_image()
-    rs = rmodel.predict("image.jpg", confidence=40, overlap=30)
+    # rs = rmodel.predict("image.jpg", confidence=40, overlap=30)
     #if len(rs) == 0:
         #return "Please try again"
-    if len(rs)>0:
-        return "Real" #rs[0]['class'].rstrip('_')
+    # if len(rs)>0:
+    #     return "Real" #rs[0]['class'].rstrip('_')
     predictions = model.predict(img_array, verbose=0)
     
     # Get the index of the class with the highest probability
